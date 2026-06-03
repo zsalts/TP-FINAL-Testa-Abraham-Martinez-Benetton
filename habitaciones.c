@@ -3,35 +3,7 @@
 #include <string.h>
 #define MAX 100
 #include <time.h>
-
-typedef struct{
-    int numHab;
-    int capacidad;
-    int disponibilidad;
-    int desayuno;
-    char servicios[100];
-} stHabitaciones;
-
-typedef struct{
-    char empleado[30];
-    char claveDeAcceso[30];
-} stPersonal;
-
-//Prototipado
-void cargarHabitacion(stHabitaciones habitaciones[], int *validos);
-void mostrarUnaHabitacion(stHabitaciones habitacion);
-void mostrarHabitaciones(stHabitaciones habitaciones[], int validos);
-int buscarHabitacion(stHabitaciones habitaciones[], int validos, int numero);
-void modificarHabitacion(stHabitaciones habitaciones[], int validos);
-void mostrarDisponibles(stHabitaciones habitaciones[], int validos);
-void mostrarNoDisponibles(stHabitaciones habitaciones[], int validos);
-
-int main()
-{
-    stHabitaciones habitaciones[100];
-    int validos = 0;
-    return 0;
-}
+#include "habitaciones.h"
 
 void cargarHabitacion(stHabitaciones habitaciones[], int *validos)
 {

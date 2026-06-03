@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "habitaciones.h"
+
 void loginempleado();
 void logincliente();
 void registrarempleado();
