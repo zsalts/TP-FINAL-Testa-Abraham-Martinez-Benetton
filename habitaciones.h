@@ -1,3 +1,10 @@
+#ifndef HABITACIONES_H_INCLUDED
+#define HABITACIONES_H_INCLUDED
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
 typedef struct{
     int numHab;
     int capacidad;
@@ -19,3 +26,5 @@ int buscarHabitacion(stHabitaciones habitaciones[], int validos, int numero);
 void modificarHabitacion(stHabitaciones habitaciones[], int validos);
 void mostrarDisponibles(stHabitaciones habitaciones[], int validos);
 void mostrarNoDisponibles(stHabitaciones habitaciones[], int validos);
+
+#endif
