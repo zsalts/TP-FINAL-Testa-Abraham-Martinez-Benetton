@@ -35,9 +35,11 @@ int main()
             menuClientes();
             break;
         case 2:
-            menuHabitaciones(ArregloHabitaciones, &validosHab,  pedidosServicio);
+            menuHabitaciones(ArregloHabitaciones, &validosHab, pedidosServicio);
             break;
-        // case 3: menuEmpleados(&pedidosServicio); break;
+        case 3:
+            menuEmpleados(pedidosServicio);
+            break;
         case 4:
             printf("\n--- MENU DE COMIDAS DISPONIBLES ---\n");
             for (int i = 0; i < 4; i++)
@@ -51,8 +53,7 @@ int main()
         default:
             printf("\nOpcion invalida.\n");
         }
-    }
-    while (opcion != 0);
+    } while (opcion != 0);
 
     return 0;
 }

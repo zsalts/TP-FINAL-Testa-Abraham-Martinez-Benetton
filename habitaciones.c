@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define MAX 100
-#include <time.h>
 #include "habitaciones.h"
 
 void cargarHabitacion(stHabitaciones habitaciones[], int *validos)
