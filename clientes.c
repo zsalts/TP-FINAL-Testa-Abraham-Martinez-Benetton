@@ -33,10 +33,13 @@ void altaCliente()
 
         fflush(stdin);
         printf("Ingrese el nombre completo: ");
+        while(getchar() != '\n');
         gets(nuevoCliente.nombreCompleto);
         printf("Ingrese el email: ");
+        while(getchar() != '\n');
         gets(nuevoCliente.email);
         printf("Ingrese un password: ");
+        while(getchar() != '\n');
         gets(nuevoCliente.password);
 
         nuevoCliente.estado = 1;

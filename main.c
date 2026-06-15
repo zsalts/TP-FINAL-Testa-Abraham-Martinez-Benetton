@@ -3,6 +3,7 @@
 #include "pila.h"
 #include "clientes.h"
 #include "habitaciones.h"
+#include "empleados.h"
 
 int main()
 {
