@@ -4,15 +4,20 @@
 #include "clientes.h"
 #include "habitaciones.h"
 
-int main() {
+int main()
+{
     int opcion;
-    
+    stHabitaciones ArregloHabitaciones[100];
+    int validosHab = 0;
+
     Pila pedidosServicio;
-    inicpila(&pedidosServicio); 
+    inicpila(&pedidosServicio);
 
     char menuComidas[4][20] = {"Continental", "Buffet", "Americano", "Ingles"};
 
-    do {
+    do
+    {
+        system("cls");
         printf("\n========================================\n");
         printf("      SISTEMA DE GESTION DE HOTEL       \n");
         printf("========================================\n");
@@ -23,21 +28,31 @@ int main() {
         printf("0. Salir\n");
         printf("Ingrese una opcion: ");
         scanf("%d", &opcion);
-
-        switch(opcion) {
-            case 1: menuClientes(); break;
-            //case 2: menuHabitaciones(&pedidosServicio); break;
-            //case 3: menuEmpleados(&pedidosServicio); break;
-            case 4: 
-                printf("\n--- MENU DE COMIDAS DISPONIBLES ---\n");
-                for(int i=0; i<4; i++) {
-                    printf("%d. %s\n", i+1, menuComidas[i]);
-                }
-                break;
-            case 0: printf("\nSaliendo del sistema. Hasta luego!\n"); break;
-            default: printf("\nOpcion invalida.\n");
+        system("cls");
+        switch (opcion)
+        {
+        case 1:
+            menuClientes();
+            break;
+        case 2:
+            menuHabitaciones(ArregloHabitaciones, &validosHab,  pedidosServicio);
+            break;
+        // case 3: menuEmpleados(&pedidosServicio); break;
+        case 4:
+            printf("\n--- MENU DE COMIDAS DISPONIBLES ---\n");
+            for (int i = 0; i < 4; i++)
+            {
+                printf("%d. %s\n", i + 1, menuComidas[i]);
+            }
+            break;
+        case 0:
+            printf("\nSaliendo del sistema. Hasta luego!\n");
+            break;
+        default:
+            printf("\nOpcion invalida.\n");
         }
-    } while(opcion != 0);
+    }
+    while (opcion != 0);
 
     return 0;
 }
