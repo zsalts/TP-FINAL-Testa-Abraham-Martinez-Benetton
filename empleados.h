@@ -6,7 +6,7 @@
 #include <string.h>
 #include "pila.h"
 
-typedef struct 
+typedef struct
 {
     int legajo;
     char nombre[50];
@@ -20,6 +20,6 @@ void mostrarEmpleados ();
 void bajaEmpleados();
 void modificarEmpleados();
 void consultarEmpleados();
-void menuEmpleados(Pila pedidos);
+void menuEmpleados(Pila *pedidos);
 
 #endif

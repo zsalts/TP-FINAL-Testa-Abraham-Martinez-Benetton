@@ -114,7 +114,7 @@ void mostrarNoDisponibles(stHabitaciones habitaciones[], int validos)
     }
 }
 
-void menuHabitaciones(stHabitaciones Habitaciones[], int *validos, Pila pedidos)
+void menuHabitaciones(stHabitaciones Habitaciones[], int *validos, Pila *pedidos)
 {
     int opcion;
     int numeroBuscado, pos;
@@ -190,7 +190,7 @@ void menuHabitaciones(stHabitaciones Habitaciones[], int *validos, Pila pedidos)
             printf("\n--- NUEVO PEDIDO DE ROOM SERVICE ---\n");
             printf("Ingrese el numero de habitacion que solicita servicio: ");
             scanf("%d", &numeroBuscado);
-            apilar(&pedidos, numeroBuscado);
+            apilar(pedidos, numeroBuscado);
             printf("Pedido de la habitacion %d agregado a la fila de trabajo.\n", numeroBuscado);
             break;
         case 0:

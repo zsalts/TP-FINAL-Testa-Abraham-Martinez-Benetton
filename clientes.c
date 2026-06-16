@@ -17,37 +17,45 @@ int buscarClienteRecursivo(FILE *archi, int idBusqueda)
 void altaCliente()
 {
     stCliente nuevoCliente;
-    FILE *archi = fopen("clientes.dat", "ab");
-    if (archi != NULL)
+    printf("Ingrese el ID del cliente: ");
+    scanf("%d", &nuevoCliente.idCliente);
+    FILE *archiBusqueda = fopen("clientes.dat", "rb");
+    if (archiBusqueda != NULL)
     {
-        printf("Ingrese el ID del cliente: ");
-        scanf("%d", &nuevoCliente.idCliente);
 
-        rewind(archi);
-        if (buscarClienteRecursivo(archi, nuevoCliente.idCliente) == 1)
+        if (buscarClienteRecursivo(archiBusqueda, nuevoCliente.idCliente) == 1)
         {
             printf("\nERROR: El ID ya se encuentra registrado.\n");
-            fclose(archi);
+            fclose(archiBusqueda);
             return;
         }
+        fclose(archiBusqueda);
+    }
 
-        fflush(stdin);
-        printf("Ingrese el nombre completo: ");
-        while(getchar() != '\n');
-        gets(nuevoCliente.nombreCompleto);
-        printf("Ingrese el email: ");
-        while(getchar() != '\n');
-        gets(nuevoCliente.email);
-        printf("Ingrese un password: ");
-        while(getchar() != '\n');
-        gets(nuevoCliente.password);
+    fflush(stdin);
 
-        nuevoCliente.estado = 1;
+    printf("Ingrese el nombre completo: ");
+    while(getchar() != '\n');
+    gets(nuevoCliente.nombreCompleto);
 
-        fseek(archi, 0, SEEK_END);
-        fwrite(&nuevoCliente, sizeof(stCliente), 1, archi);
-        fclose(archi);
+    printf("Ingrese el email: ");
+    scanf("%s", nuevoCliente.email);
+
+    printf("Ingrese un password: ");
+    scanf("%s", nuevoCliente.password);
+
+    nuevoCliente.estado = 1;
+
+    FILE *archiGuardar = fopen("clientes.dat", "ab");
+    if (archiGuardar != NULL)
+    {
+        fwrite(&nuevoCliente, sizeof(stCliente), 1, archiGuardar);
+        fclose(archiGuardar);
         printf("\nCliente registrado con exito.\n");
+    }
+    else
+    {
+        printf("\nError al abrir el archivo para guardar.\n");
     }
 }
 
@@ -92,6 +100,7 @@ void modificarCliente()
             {
                 fflush(stdin);
                 printf("Nuevo nombre: ");
+                while(getchar() != '\n');
                 gets(c.nombreCompleto);
                 fseek(archi, sizeof(stCliente) * -1, SEEK_CUR);
                 fwrite(&c, sizeof(stCliente), 1, archi);
@@ -168,7 +177,7 @@ void listarClientesSeleccion()
         posMenor = i;
         for (int j = i + 1; j < validos; j++)
         {
-            if (strcmpi(arregloClientes[j].nombreCompleto, arregloClientes[posMenor].nombreCompleto) < 0)
+            if (arregloClientes[j].idCliente < arregloClientes[posMenor].idCliente)
             {
                 posMenor = j;
             }
@@ -178,7 +187,7 @@ void listarClientesSeleccion()
         arregloClientes[posMenor] = aux;
     }
 
-    printf("\n--- LISTADO DE CLIENTES (Orden Alfabetico) ---\n");
+    printf("\n--- LISTADO DE CLIENTES (Orden ID) ---\n");
     for (i = 0; i < validos; i++)
     {
         printf("ID: %d | Nombre: %s | Email: %s\n", arregloClientes[i].idCliente, arregloClientes[i].nombreCompleto, arregloClientes[i].email);
@@ -191,6 +200,7 @@ void menuClientes()
     int opcion;
     do
     {
+        system("cls");
         printf("\n--- MENU CLIENTES ---\n");
         printf("1. Alta de Cliente\n");
         printf("2. Baja Logica de Cliente\n");
@@ -200,24 +210,30 @@ void menuClientes()
         printf("0. Volver\n");
         printf("Opcion: ");
         scanf("%d", &opcion);
-
+        system("cls");
         switch (opcion)
         {
         case 1:
             altaCliente();
+            system("pause");
             break;
         case 2:
             bajaCliente();
+            system("pause");
             break;
         case 3:
             modificarCliente();
+            system("pause");
             break;
         case 4:
             consultarCliente();
+            system("pause");
             break;
         case 5:
             listarClientesSeleccion();
+            system("pause");
             break;
         }
-    } while (opcion != 0);
+    }
+    while (opcion != 0);
 }

@@ -26,6 +26,6 @@ int buscarHabitacion(stHabitaciones habitaciones[], int validos, int numero);
 void modificarHabitacion(stHabitaciones habitaciones[], int validos);
 void mostrarDisponibles(stHabitaciones habitaciones[], int validos);
 void mostrarNoDisponibles(stHabitaciones habitaciones[], int validos);
-void menuHabitaciones(stHabitaciones habitaciones[], int *validos, Pila p);
+void menuHabitaciones(stHabitaciones habitaciones[], int *validos, Pila *p);
 
 #endif
