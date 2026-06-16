@@ -195,45 +195,58 @@ void listarClientesSeleccion()
     free(arregloClientes);
 }
 
-void menuClientes()
-{
+void menuClientes() {
     int opcion;
-    do
-    {
+
+    do {
         system("cls");
-        printf("\n--- MENU CLIENTES ---\n");
+        printf("========================================\n");
+        printf("           GESTION DE CLIENTES          \n");
+        printf("========================================\n");
         printf("1. Alta de Cliente\n");
         printf("2. Baja Logica de Cliente\n");
         printf("3. Modificar Cliente\n");
         printf("4. Consultar Cliente por ID\n");
         printf("5. Listar Clientes (Seleccion)\n");
         printf("0. Volver\n");
-        printf("Opcion: ");
+        printf("========================================\n");
+        printf("Ingrese una opcion: ");
         scanf("%d", &opcion);
+
         system("cls");
-        switch (opcion)
-        {
-        case 1:
-            altaCliente();
-            system("pause");
-            break;
-        case 2:
-            bajaCliente();
-            system("pause");
-            break;
-        case 3:
-            modificarCliente();
-            system("pause");
-            break;
-        case 4:
-            consultarCliente();
-            system("pause");
-            break;
-        case 5:
-            listarClientesSeleccion();
-            system("pause");
-            break;
+
+        switch(opcion) {
+            case 1:
+                printf("\n--- ALTA DE CLIENTE ---\n");
+                altaCliente();
+                break;
+            case 2:
+                printf("\n--- BAJA LOGICA DE CLIENTE ---\n");
+                bajaCliente();
+                break;
+            case 3:
+                printf("\n--- MODIFICAR CLIENTE ---\n");
+                modificarCliente();
+                break;
+            case 4:
+                printf("\n--- CONSULTA DE CLIENTE ---\n\n");
+                consultarCliente();
+                break;
+            case 5:
+                printf("\n--- LISTA DE CLIENTES ---\n\n");
+                listarClientesSeleccion();
+                break;
+            case 0:
+                printf("\nVolviendo al menu principal...\n");
+                break;
+            default:
+                printf("\nOpcion invalida. Intente de nuevo.\n");
         }
-    }
-    while (opcion != 0);
+
+        if(opcion != 0) {
+            printf("\n");
+            system("pause");
+        }
+
+    } while (opcion != 0);
 }

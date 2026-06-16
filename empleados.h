@@ -14,7 +14,7 @@ typedef struct
     int estado;
 
 }stEmpleados;
-
+int buscarEmpleadosRecursivo(FILE *archi, int idBusqueda);
 void cargarEmpleados ();
 void mostrarEmpleados ();
 void bajaEmpleados();

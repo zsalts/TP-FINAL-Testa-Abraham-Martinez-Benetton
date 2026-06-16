@@ -2,32 +2,58 @@
 #include "comidas.h"
 
 const char empleados[] = "empleado.dat";
-
+int buscarEmpleadosRecursivo(FILE *archi, int idBusqueda)
+{
+    stEmpleados c;
+    if (fread(&c, sizeof(stEmpleados), 1, archi) == 0)
+    {
+        return 0;
+    }
+    if (c.legajo == idBusqueda)
+    {
+        return 1;
+    }
+    return buscarEmpleadosRecursivo(archi, idBusqueda);
+}
 void cargarEmpleados()
 {
-    stEmpleados aux;
-    FILE *buffer = fopen(empleados, "ab");
-    if (buffer != NULL)
+    stEmpleados nuevoEmpleado;
+    printf("Ingrese el Legajo del cliente: ");
+    scanf("%d", &nuevoEmpleado.legajo);
+    FILE *archiBusqueda = fopen(empleados, "rb");
+    if (archiBusqueda != NULL)
     {
-        printf("Ingrese numero de legajo: ");
-        scanf("%i", &aux.legajo);
 
-        fflush(stdin);
-        printf("Ingrese el nombre del empleado: ");
-        fgets(aux.nombre, 50, stdin);
-        aux.nombre[strcspn(aux.nombre, "\n")] = 0;
-        printf("Ingrese el puesto: ");
-        fgets(aux.puesto, 50, stdin);
-        aux.puesto[strcspn(aux.puesto, "\n")] = 0;
+        if (buscarEmpleadosRecursivo(archiBusqueda, nuevoEmpleado.legajo) == 1)
+        {
+            printf("\nERROR: El LEGAJO ya se encuentra registrado.\n");
+            fclose(archiBusqueda);
+            return;
+        }
+        fclose(archiBusqueda);
+    }
 
-        aux.estado = 1;
-        fwrite(&aux, sizeof(stEmpleados), 1, buffer);
-        fclose(buffer);
-        printf("\nEmpleado cargado correctamente. \n");
+    fflush(stdin);
+
+    printf("Ingrese el nombre completo: ");
+    while(getchar() != '\n');
+    gets(nuevoEmpleado.nombre);
+
+    printf("Ingrese el Puesto: ");
+    scanf("%s", nuevoEmpleado.puesto);
+
+    nuevoEmpleado.estado = 1;
+
+    FILE *archiGuardar = fopen(empleados, "ab");
+    if (archiGuardar != NULL)
+    {
+        fwrite(&nuevoEmpleado, sizeof(stEmpleados), 1, archiGuardar);
+        fclose(archiGuardar);
+        printf("\nEmpleado registrado con exito.\n");
     }
     else
     {
-        printf("No se pudo abrir el archivo.\n");
+        printf("\nError al abrir el archivo para guardar.\n");
     }
 }
 
@@ -100,10 +126,11 @@ void modificarEmpleado()
             {
                 fflush(stdin);
                 printf("Ingrese el nuevo puesto: ");
-                fgets(aux.puesto, 50, stdin);
+                while(getchar() != '\n');
+                gets(aux.puesto);
                 aux.puesto[strcspn(aux.puesto, "\n")] = 0;
 
-                fseek(buffer, (long)sizeof(stEmpleados) * -1, SEEK_CUR);
+                fseek(buffer, sizeof(stEmpleados) * -1, SEEK_CUR);
                 fwrite(&aux, sizeof(stEmpleados), 1, buffer);
                 flag = 1;
                 printf("El puesto fue modificado correctamente.\n");
